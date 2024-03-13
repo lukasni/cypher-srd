@@ -1,3 +1,6 @@
+# SRD download directory
+/priv/srd/
+
 # The directory Mix will write compiled artifacts to.
 /_build/
 
