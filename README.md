@@ -1,18 +1,16 @@
 # CypherSrd
 
-To start your Phoenix server:
+Searchable interface for Cypher System information available under the CSOL.
 
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+Powered by the fantastic JSON exports provided by Jon Davis' [Cypher System JSON DB](https://github.com/Jon-Davis/Cypher-System-JSON-DB)
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+Additional data from the CSRD document is used and has to be updated manually.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+# CSOL Disclaimer
 
-## Learn more
+This product is an independent production and is not affiliated with Monte Cook Games, LLC. 
+It is published under the Cypher System Open License, found at http://csol.montecookgames.com.
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+CYPHER SYSTEM and its logo are trademarks of Monte Cook Games, LLC in the U.S.A. 
+and other countries. All Monte Cook Games characters and character names, 
+and the distinctive likenesses thereof, are trademarks of Monte Cook Games, LLC. 

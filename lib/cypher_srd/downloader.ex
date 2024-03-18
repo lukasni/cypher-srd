@@ -61,7 +61,7 @@ defmodule CypherSrd.Downloader do
 
   def srd_dir do
     :code.priv_dir(:cypher_srd)
-    |> Path.join("srd")
+    |> Path.join("srd/download")
   end
 
   def active_path do

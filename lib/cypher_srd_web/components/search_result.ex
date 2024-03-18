@@ -1,9 +1,11 @@
 defmodule CypherSrdWeb.SearchResult do
   use CypherSrdWeb, :html
 
+  import CypherSrd.Util, only: [title_case: 1]
+
   def resultlist(assigns) do
     ~H"""
-    <div class="mt-4">
+    <div class="mt-4" id="search-results" phx-hook="Mark">
       <%= render_slot(@inner_block) %>
     </div>
     """
@@ -17,6 +19,7 @@ defmodule CypherSrdWeb.SearchResult do
       description={@description}
       type="Ability"
       type_class="text-rose-500"
+      phx-click={JS.navigate(~p"/abilities/#{@name}/")}
     />
     """
   end
@@ -29,6 +32,19 @@ defmodule CypherSrdWeb.SearchResult do
       description={@description}
       type="Descriptor"
       type_class="text-emerald-500"
+    />
+    """
+  end
+
+  # Type
+  def item(assigns) when is_map_key(assigns, :background) do
+    ~H"""
+    <.name_and_description
+      name={@name}
+      description={@description}
+      type="Type"
+      type_class="text-emerald-500"
+      phx-click={JS.navigate(~p"/types/#{@name}/")}
     />
     """
   end
@@ -60,12 +76,7 @@ defmodule CypherSrdWeb.SearchResult do
   # Cypher
   def item(assigns) when is_map_key(assigns, :level_dice) do
     ~H"""
-    <.name_and_description
-      name={@name}
-      description={@effect}
-      type="Cypher"
-      type_class="text-sky-500"
-    />
+    <.name_and_description name={@name} description={@effect} type="Cypher" type_class="text-sky-500" />
     """
   end
 
@@ -75,7 +86,7 @@ defmodule CypherSrdWeb.SearchResult do
     <.two_col>
       <:title>
         <div class="text-zinc-500"><%= title_case(@name) %></div>
-        <div class="text-blue-500">Equipment</div>
+        <div class="text-blue-500 mark-ignore">Equipment</div>
       </:title>
       <:body>
         <strong>Variants</strong>
@@ -100,23 +111,7 @@ defmodule CypherSrdWeb.SearchResult do
   end
 
   # Type, identified by the background key
-  def item(assigns) when is_map_key(assigns, :background) do
-    ~H"""
-    <.two_col>
-      <:title>
-        <div class="text-zinc-500"><%= title_case(@name) %></div>
-        <div class="text-emerald-500">Type</div>
-      </:title>
-      <:body>
-        <.list>
-          <:item :for={ability <- @abilities} title={ability.name}>
-            <%= ability.description %>
-          </:item>
-        </.list>
-      </:body>
-    </.two_col>
-    """
-  end
+  
 
   # Other, for now
   def item(assigns) do
@@ -124,7 +119,7 @@ defmodule CypherSrdWeb.SearchResult do
     <.two_col>
       <:title>
         <div class="text-zinc-500"><%= title_case(@name) %></div>
-        <div class="text-orange-500">Other</div>
+        <div class="text-orange-500 mark-ignore">Other</div>
       </:title>
       <:body>
         <pre class="text-xs"><%= inspect(assigns, pretty: true) %></pre>
@@ -133,9 +128,16 @@ defmodule CypherSrdWeb.SearchResult do
     """
   end
 
+  attr :rest, :global
+  slot :title, required: true
+  slot :body, required: true
+
   def two_col(assigns) do
     ~H"""
-    <div class="flex gap-4 py-4 text-sm leading-6 border-t sm:gap-8">
+    <div
+      class="flex gap-4 p-4 text-sm leading-6 border-t sm:gap-8 hover:bg-zinc-300 bg-opacity-50"
+      {@rest}
+    >
       <div class="flex-none w-1/4">
         <%= render_slot(@title) %>
       </div>
@@ -146,24 +148,23 @@ defmodule CypherSrdWeb.SearchResult do
     """
   end
 
+  attr :name, :string, required: :true
+  attr :type, :string, required: :true
+  attr :type_class, :string, required: :true
+  attr :description, :string, required: :true
+  attr :rest, :global
+
   def name_and_description(assigns) do
     ~H"""
-    <.two_col>
+    <.two_col {@rest}>
       <:title>
         <div class="text-zinc-500"><%= title_case(@name) %></div>
-        <div class={@type_class}><%= @type %></div>
+        <div class={["mark-ignore", @type_class]}><%= @type %></div>
       </:title>
       <:body>
         <%= @description %>
       </:body>
     </.two_col>
     """
-  end
-
-  def title_case(string) do
-    string
-    |> String.split
-    |> Enum.map(&String.capitalize/1)
-    |> Enum.join(" ")
   end
 end

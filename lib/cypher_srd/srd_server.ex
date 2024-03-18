@@ -28,7 +28,7 @@ defmodule CypherSrd.SrdServer do
   end
 
   def version() do
-    GenServer.call(__MODULE__, :get_version)
+    GenServer.call(__MODULE__, {:get_srd, :version})
   end
 
   def get_srd() do
@@ -36,8 +36,14 @@ defmodule CypherSrd.SrdServer do
   end
 
   def get_srd(key) when key in @keys do
-    get_srd()
-    |> Map.get(key)
+    GenServer.call(__MODULE__, {:get_srd, key})
+  end
+
+  def get_srd(key, name) do
+    get_srd(key)
+    |> Enum.find(fn item ->
+      String.downcase(item.name) == String.downcase(name)
+    end)
   end
 
   def search_list() do
@@ -75,11 +81,9 @@ defmodule CypherSrd.SrdServer do
     {:reply, state.srd, state}
   end
 
-  def handle_call(:get_version, _from, state) do
-    {:reply, state.srd.version, state}
+  def handle_call({:get_srd, key}, _from, state) do
+    {:reply, state.srd[key], state}
   end
-
-  # Helpers
 
   defp load_active(state) do
     CypherSrd.Downloader.maybe_download(%{tag: "v0.2.1"})
@@ -88,9 +92,45 @@ defmodule CypherSrd.SrdServer do
       CypherSrd.Downloader.active_path()
       |> File.read!()
       |> Jason.decode!(keys: :atoms)
+      |> add_extra_data()
 
     Logger.info("Loading Cypher SRD version #{srd.version}")
 
     {:noreply, Map.put(state, :srd, srd)}
+  end
+
+  defp add_extra_data(srd) do
+    extra_data =
+      :code.priv_dir(:cypher_srd)
+      |> Path.join("srd/extra_data.json")
+      |> File.read!()
+      |> Jason.decode!(keys: :atoms)
+
+    srd_version = srd.version
+
+    case extra_data.version do
+      ^srd_version ->
+        Logger.info("Extra Data version matches SRD version")
+
+      _other ->
+        Logger.warning(
+          "Extra Data / SRD version mismatch! SRD: #{srd.version}, ED: #{extra_data.version}"
+        )
+    end
+
+    merge_types(srd, extra_data)
+  end
+
+  defp merge_types(srd, extra_data) do
+    types =
+      srd.types
+      |> Enum.map(fn type ->
+        extra_data
+        |> Map.get(:types)
+        |> Enum.find(&(&1.name == type.name))
+        |> Map.merge(type)
+      end)
+
+    %{srd | types: types}
   end
 end

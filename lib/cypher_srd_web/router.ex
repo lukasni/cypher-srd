@@ -18,8 +18,9 @@ defmodule CypherSrdWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
-    live "/abilities", AbilitiesLive
     live "/search", SearchLive
+    live "/types/:type", TypeLive
+    live "/abilities/:ability", AbilityLive
   end
 
   # Other scopes may use custom stacks.

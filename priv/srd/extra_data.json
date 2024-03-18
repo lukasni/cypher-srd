@@ -1,0 +1,45 @@
+{
+  "version": "2024-03-09",
+  "types": [
+    {
+      "name": "WARRIOR",
+      "description": "You’re a good ally to have in a fight. You know how to use weapons and defend yourself. Depending on the genre and setting in question, this might mean wielding a sword and shield in the gladiatorial arena, an AK-47 and a bandolier of grenades in a savage firefight, or a blaster rifle and powered armor when exploring an alien planet.",
+      "roles": {
+        "individual": "Warriors are physical, action-oriented people. They’re more likely to overcome a challenge using force than by other means, and they often take the most straightforward path toward their goals.",
+        "group": "Warriors usually take and deal the most punishment in a dangerous situation. Often it falls on them to protect the other group members from threats. This sometimes means that warriors take on leadership roles as well, at least in combat and other times of danger.",
+        "societal": "Warriors aren’t always soldiers or mercenaries. Anyone who is ready for violence, or even potential violence, might be a Warrior in the general sense. This includes guards, watchmen, police officers, sailors, or people in other roles or professions who know how to defend themselves with skill. "
+      },
+      "advanced": "As warriors advance, their skill in battle—whether defending themselves or dishing out damage—increases to impressive levels. At higher tiers, they can often take on groups of foes by themselves or stand toe to toe with anyone."
+    },
+    {
+      "name": "ADEPT",
+      "description": "You master powers or abilities outside the experience, understanding, and sometimes belief of others. They might be magic, psychic powers, mutant abilities, or just a wide variety of intricate devices, depending on the setting. (“Magic” here is a term used very loosely. It’s a catch-all for the kinds of wondrous, possibly supernatural things that your character can do that others cannot. It might actually be an expression of technological devices, channeling spirits, mutations, psionics, nanotechnology, or any number of other sources.)",
+      "roles": {
+        "individual": "Adepts are usually thoughtful, intelligent types. They often think carefully before acting and rely heavily on their supernatural abilities.",
+        "group": "Adepts are not powerful in straightforward combat, although they often wield abilities that provide excellent combat support, both offensively and defensively. They sometimes possess abilities that facilitate overcoming challenges. For example, if the group must get through a locked door, an Adept might be able to destroy it or teleport everyone to the other side. ",
+        "societal": "In settings where the supernatural is rare, strange, or feared, Adepts are likely rare and feared as well. They remain hidden, shadowy figures. When this is not the case, Adepts are more likely to be common and forthright. They might even take leadership roles."
+      },
+      "advanced": "Even at low tiers, Adept powers are impressive. Higher-tier Adepts can accomplish amazing deeds that can reshape matter and the environment around them."
+    },
+    {
+      "name": "EXPLORER",
+      "description": "You are a person of action and physical ability, fearlessly facing the unknown. You travel to strange, exotic, and dangerous places, and discover new things. This means you’re physical but also probably knowledgeable.",
+      "roles": {
+        "individual": "Although Explorers can be academics or well studied, they are first and foremost interested in action. They face grave dangers and terrible obstacles as a routine part of life. ",
+        "group": "Explorers sometimes work alone, but far more often they operate in teams with other characters. The Explorer frequently leads the way, blazing the trail. However, they’re also likely to stop and investigate anything intriguing they stumble upon. ",
+        "societal": "Not all Explorers are out traipsing through the wilderness or poking about an old ruin. Sometimes, an Explorer is a teacher, a scientist, a detective, or an investigative reporter. In any event, an Explorer bravely faces new challenges and gathers knowledge to share with others."
+      },
+      "advanced": "Higher-tier Explorers gain more skills, some combat abilities, and a number of abilities that allow them to deal with danger. In short, they become more and more well-rounded, able to deal with any challenge."
+    },
+    {
+      "name": "SPEAKER",
+      "description": "You’re good with words and good with people. You talk your way past challenges and out of jams, and you get people to do what you want.",
+      "roles": {
+        "individual": "Speakers are smart and charismatic. They like people and, more important, they understand them. This helps speakers get others to do what needs to be done. ",
+        "group": "The Speaker is often the face of the group, serving as the person who speaks for all and negotiates with others. Combat and action are not a Speaker’s strong suits, so other characters sometimes have to defend the Speaker in times of danger.",
+        "societal": "Speakers are frequently political or religious leaders. Just as often, however, they are con artists or criminals. "
+      },
+      "advanced": "Higher-tier speakers use their abilities to control and manipulate people as well as aid and nurture their friends. They can talk their way out of danger and even use their words as weapons."
+    }
+  ]
+}
