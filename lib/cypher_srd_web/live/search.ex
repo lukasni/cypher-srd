@@ -18,7 +18,13 @@ defmodule CypherSrdWeb.SearchLive do
       |> Search.search()
       |> Enum.take(10)
 
-    {:noreply, assign(socket, :results, results)}
+    socket =
+      socket
+      |> assign(:results, results)
+      |> assign(:search, search)
+      |> push_event("new-search", %{search: search})
+
+    {:noreply, socket}
   end
 
   def render(assigns) do
@@ -28,7 +34,7 @@ defmodule CypherSrdWeb.SearchLive do
       <:subtitle>Search various objects by title</:subtitle>
     </.header>
     <form phx-change="search" class="mt-4">
-      <.input type="text" name="search" value={@search} placeholder="Start typing..." />
+      <.input type="text" name="search" id="omnisearch" value={@search} placeholder="Start typing..." />
     </form>
     <SearchResult.resultlist>
       <SearchResult.item :for={result <- @results} {result} />
