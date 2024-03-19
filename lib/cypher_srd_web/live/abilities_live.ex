@@ -4,7 +4,7 @@ defmodule CypherSrdWeb.AbilityLive do
   alias CypherSrd.SrdServer, as: SRD
   import CypherSrd.Util, only: [title_case: 1]
   import CypherSrdWeb.RollTable
-  
+
   def mount(_params, _session, socket) do
     {:ok, socket}
   end
@@ -13,7 +13,7 @@ defmodule CypherSrdWeb.AbilityLive do
     socket =
       socket
       |> assign(:ability, SRD.get_srd(:abilities, ability))
-      
+
     {:noreply, socket}
   end
 

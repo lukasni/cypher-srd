@@ -68,7 +68,6 @@ defmodule CypherSrdWeb.TypeLive do
       <ul>
         <li :for={ability <- aft(@type, tier.tier)}>
           <%= ability.name %>
-          <%# TODO: Ability Link %>
         </li>
       </ul>
     </div>

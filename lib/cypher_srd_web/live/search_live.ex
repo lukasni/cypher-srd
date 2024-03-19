@@ -12,7 +12,7 @@ defmodule CypherSrdWeb.SearchLive do
     {:ok, socket}
   end
 
-  def handle_event("search", %{"search" => search}, socket) do
+  def handle_params(%{"q" => search}, _uri, socket) do
     results =
       search
       |> Search.search()
@@ -27,6 +27,14 @@ defmodule CypherSrdWeb.SearchLive do
     {:noreply, socket}
   end
 
+  def handle_params(_params, _uri, socket) do
+    {:noreply, socket}
+  end
+
+  def handle_event("search", %{"search" => search}, socket) do
+    {:noreply, push_patch(socket, to: ~p"/search?q=#{search}")}
+  end
+
   def render(assigns) do
     ~H"""
     <.header>
@@ -39,6 +47,8 @@ defmodule CypherSrdWeb.SearchLive do
     <SearchResult.resultlist>
       <SearchResult.item :for={result <- @results} {result} />
     </SearchResult.resultlist>
+
+    <%= live_render(@socket, CypherSrdWeb.TrayLive, id: "tray") %>
     """
   end
 end

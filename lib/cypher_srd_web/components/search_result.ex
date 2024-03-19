@@ -110,9 +110,6 @@ defmodule CypherSrdWeb.SearchResult do
     """
   end
 
-  # Type, identified by the background key
-  
-
   # Other, for now
   def item(assigns) do
     ~H"""
@@ -135,7 +132,7 @@ defmodule CypherSrdWeb.SearchResult do
   def two_col(assigns) do
     ~H"""
     <div
-      class="flex gap-4 p-4 text-sm leading-6 border-t sm:gap-8 hover:bg-zinc-300 bg-opacity-50"
+      class="relative flex gap-4 p-4 text-sm leading-6 border-t sm:gap-8 hover:bg-zinc-300 bg-opacity-50"
       {@rest}
     >
       <div class="flex-none w-1/4">
@@ -144,21 +141,24 @@ defmodule CypherSrdWeb.SearchResult do
       <div class="text-zinc-700">
         <%= render_slot(@body) %>
       </div>
+      <.icon name="hero-bookmark-solid" class="h-4 w-4 absolute top-2 right-2" />
     </div>
     """
   end
 
-  attr :name, :string, required: :true
-  attr :type, :string, required: :true
-  attr :type_class, :string, required: :true
-  attr :description, :string, required: :true
+  attr :name, :string, required: true
+  attr :type, :string, required: true
+  attr :type_class, :string, required: true
+  attr :description, :string, required: true
   attr :rest, :global
 
   def name_and_description(assigns) do
     ~H"""
     <.two_col {@rest}>
       <:title>
-        <div class="text-zinc-500"><%= title_case(@name) %></div>
+        <div class="text-zinc-500">
+          <%= title_case(@name) %>
+        </div>
         <div class={["mark-ignore", @type_class]}><%= @type %></div>
       </:title>
       <:body>

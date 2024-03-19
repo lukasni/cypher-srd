@@ -1,14 +1,15 @@
 defmodule CypherSrdWeb.RollTable do
   use CypherSrdWeb, :html
-  
+
   attr :id, :string, required: true
   attr :table, :map, required: true
-  
+
   attr :description, :string, default: nil
 
   def roll_table(assigns) do
     assigns =
       assign(assigns, :dice_range, dice_range(assigns.table))
+
     ~H"""
     <div>
       <.table id={@id} rows={@table}>
@@ -27,13 +28,14 @@ defmodule CypherSrdWeb.RollTable do
   end
 
   def dice_range(table) do
-    #min = Enum.min_by(table, &(&1.start))
-    max = Enum.max_by(table, &(&1.end))
+    # min = Enum.min_by(table, &(&1.start))
+    max = Enum.max_by(table, & &1.end)
 
     "d#{max.end}"
   end
 
   def entry_dice(%{start: r_start, end: r_end}) when r_start == r_end, do: "#{r_start}"
+
   def entry_dice(%{start: r_start, end: r_end}) do
     "#{r_start}–#{r_end}"
   end
