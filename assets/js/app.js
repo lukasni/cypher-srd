@@ -39,6 +39,23 @@ Hooks.Mark = {
   }
 }
 
+Hooks.StorePins = {
+  mounted() {
+    let pins = JSON.parse(localStorage.getItem("pins"))
+
+    if (pins) {
+      this.pushEventTo(this.el, "restore-pins", {
+        pins: JSON.parse(localStorage.getItem("pins"))
+      })
+    }
+
+    this.handleEvent("store-pins", ({pins}) => {
+      console.log(pins)
+      localStorage.setItem("pins", JSON.stringify(pins))
+    })
+  }
+}
+
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,

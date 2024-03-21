@@ -1,12 +1,15 @@
-<header class="px-4 sm:px-6 lg:px-8">
-  <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
+<header class="px-4 sticky top-0 sm:px-6 lg:px-8 bg-zinc-50 z-20 h-20">
+  <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm h-full">
     <div class="flex items-center gap-4">
       <a href="/">
         <img src={~p"/images/csol.png"} width="48" />
       </a>
-      <p class="bg-brand/5 text-brand rounded-full px-2 font-medium leading-6">
-        CSRD <%= CypherSrd.SrdServer.version() %>
-      </p>
+      <button
+        class="border rounded-lg border-zinc-300 p-2"
+        phx-click={JS.toggle_class("-translate-x-full", to: "#pinned-tray")}
+      >
+        <.icon name="hero-inbox-solid" class="" />
+      </button>
     </div>
     <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
       <.link navigate={~p"/search"}>Omnisearch</.link>
@@ -22,3 +25,4 @@
     <%= @inner_content %>
   </div>
 </main>
+<.live_component module={CypherSrdWeb.TrayComponent} id="pinned-tray" pinned_items={[]} />

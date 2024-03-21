@@ -21,6 +21,18 @@ defmodule CypherSrd.SrdServer do
     :version
   ]
 
+  @singular_keys %{
+    ability: :abilities,
+    artifact: :artifacts,
+    creature: :creatures,
+    cypher: :cyphers,
+    descriptor: :descriptors,
+    equipment: :equipment,
+    flavor: :flavors,
+    focus: :foci,
+    type: :types
+  }
+
   # Client Interface
 
   def start_link(_) do
@@ -37,6 +49,10 @@ defmodule CypherSrd.SrdServer do
 
   def get_srd(key) when key in @keys do
     GenServer.call(__MODULE__, {:get_srd, key})
+  end
+
+  def get_srd(key) when is_map_key(@singular_keys, key) do
+    GenServer.call(__MODULE__, {:get_srd, @singular_keys[key]})
   end
 
   def get_srd(key, name) do

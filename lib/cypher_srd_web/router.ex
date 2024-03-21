@@ -21,6 +21,7 @@ defmodule CypherSrdWeb.Router do
     live "/search", SearchLive
     live "/types/:type", TypeLive
     live "/abilities/:ability", AbilityLive
+    live "/descriptors/:descriptor", DescriptorLive
   end
 
   # Other scopes may use custom stacks.
