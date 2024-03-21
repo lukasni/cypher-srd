@@ -21,11 +21,46 @@ import "phoenix_html"
 import {Socket} from "phoenix"
 import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
+import Mark from "../vendor/mark.min.js"
+
+let Hooks = {}
+Hooks.Mark = {
+  mounted() {
+    instance = new Mark(document.getElementById("search-results"));
+
+    this.handleEvent("new-search", (term) => {
+      console.log(term)
+      instance.unmark();
+      instance.mark(term.search, {
+        "className": "bg-yellow-300",
+        "exclude": [".mark-ignore"]
+      });
+    })
+  }
+}
+
+Hooks.StorePins = {
+  mounted() {
+    let pins = JSON.parse(localStorage.getItem("pins"))
+
+    if (pins) {
+      this.pushEventTo(this.el, "restore-pins", {
+        pins: JSON.parse(localStorage.getItem("pins"))
+      })
+    }
+
+    this.handleEvent("store-pins", ({pins}) => {
+      console.log(pins)
+      localStorage.setItem("pins", JSON.stringify(pins))
+    })
+  }
+}
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
 let liveSocket = new LiveSocket("/live", Socket, {
   longPollFallbackMs: 2500,
-  params: {_csrf_token: csrfToken}
+  params: {_csrf_token: csrfToken},
+  hooks: Hooks
 })
 
 // Show progress bar on live navigation and form submits

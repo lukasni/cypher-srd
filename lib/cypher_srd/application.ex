@@ -16,6 +16,7 @@ defmodule CypherSrd.Application do
       {Finch, name: CypherSrd.Finch},
       # Start a worker by calling: CypherSrd.Worker.start_link(arg)
       # {CypherSrd.Worker, arg},
+      CypherSrd.SrdServer,
       # Start to serve requests, typically the last entry
       CypherSrdWeb.Endpoint
     ]
