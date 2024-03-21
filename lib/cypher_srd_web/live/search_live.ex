@@ -31,7 +31,7 @@ defmodule CypherSrdWeb.SearchLive do
     {:noreply, socket}
   end
 
-  def handle_event("search", %{"search" => search}, socket) do
+  def handle_event("search", %{"q" => search}, socket) do
     {:noreply, push_patch(socket, to: ~p"/search?q=#{search}", replace: true)}
   end
 
@@ -42,7 +42,7 @@ defmodule CypherSrdWeb.SearchLive do
       <:subtitle>Search various objects by title</:subtitle>
     </.header>
     <form phx-change="search" class="mt-4">
-      <.input type="text" name="search" id="omnisearch" value={@search} placeholder="Start typing..." />
+      <.input type="text" name="q" id="omnisearch" value={@search} placeholder="Start typing..." />
     </form>
     <SearchResult.resultlist>
       <SearchResult.item :for={result <- @results} {result} />

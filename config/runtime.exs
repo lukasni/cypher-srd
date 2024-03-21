@@ -63,7 +63,12 @@ if config_env() == :prod do
       ip: {0, 0, 0, 0, 0, 0, 0, 0},
       port: port
     ],
-    secret_key_base: secret_key_base
+    secret_key_base: secret_key_base,
+    check_origin: [
+      "//cypher-srd.live",
+      "//www.cypher-srd.live",
+      "//cypher-srd.fly.dev"
+    ]
 
   # ## SSL Support
   #
