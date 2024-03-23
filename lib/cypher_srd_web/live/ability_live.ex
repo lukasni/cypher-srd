@@ -3,7 +3,7 @@ defmodule CypherSrdWeb.AbilityLive do
 
   alias CypherSrd.SrdServer, as: SRD
   import CypherSrd.Util, only: [title_case: 1]
-  import CypherSrdWeb.RollTable
+  # import CypherSrdWeb.RollTable
 
   def mount(_params, _session, socket) do
     {:ok, socket}
@@ -21,13 +21,15 @@ defmodule CypherSrdWeb.AbilityLive do
     ~H"""
     <.header>
       <%= title_case(@ability.name) %>
-      <:subtitle>
-        <%= @ability.cost_rendered %>
-      </:subtitle>
     </.header>
 
     <div class="text-sm text-zinc-700">
-      <p><%= @ability.description %></p>
+      <p class="mt-4">
+        <strong :if={@ability.cost_rendered != ""}>
+          <%= @ability.cost_rendered %>:
+        </strong>
+        <%= @ability.description %>
+      </p>
     </div>
     """
   end
