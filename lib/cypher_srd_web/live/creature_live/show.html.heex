@@ -1,0 +1,19 @@
+<.header>
+  <%= title_case(@creature.name) %>
+  <:subtitle>
+    <p class="text-sm">Level <%= @creature.level %> <%= @creature.kind %></p>
+  </:subtitle>
+  
+</.header>  
+
+<div class="text-sm text-zinc-700 mt-4">
+  <p>
+    <%= @creature.description %>
+  </p>
+  <p :for={section <- sections()} :if={printable(@creature[section])} class="mt-2">
+    <strong>
+      <%= section_title(section) %>:
+    </strong>
+    <%= @creature[section] %>
+  </p>
+</div>
