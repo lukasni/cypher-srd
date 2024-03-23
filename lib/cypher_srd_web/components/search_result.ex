@@ -59,6 +59,7 @@ defmodule CypherSrdWeb.SearchResult do
       description={@description}
       type="Focus"
       type_class="text-emerald-500"
+      phx-click={JS.navigate(~p"/foci/#{@name}/")}
     />
     """
   end
