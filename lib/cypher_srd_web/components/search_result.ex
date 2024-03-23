@@ -148,7 +148,7 @@ defmodule CypherSrdWeb.SearchResult do
   def two_col(assigns) do
     ~H"""
     <div
-      class="relative flex gap-4 p-4 text-sm leading-6 border-t sm:gap-8 hover:bg-zinc-300 bg-opacity-50"
+      class="relative flex gap-4 p-4 text-sm leading-6 border-t sm:gap-8 hover:bg-zinc-100 bg-opacity-50"
       {@rest}
     >
       <div class="flex-none w-1/4">

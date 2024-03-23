@@ -15,7 +15,7 @@ defmodule CypherSrdWeb.TrayComponent do
       phx-hook="StorePins"
       phx-target={@myself}
     >
-      <div :for={item <- @pinned_items} class="text-sm">
+      <div :for={item <- @pinned_items} class="text-sm" phx-click={link_for(item)}>
         <h5 class="font-semibold flex justify-between">
           <%= CypherSrd.Util.title_case(item.name) %>
           <button phx-click="unpin" phx-target={@myself} phx-value-name={item.name}>
@@ -85,5 +85,21 @@ defmodule CypherSrdWeb.TrayComponent do
     socket.assigns.pinned_items
     |> Enum.map(&%{name: &1.name, type: &1.type})
     |> then(&%{pins: &1})
+  end
+
+  defp link_for(%{type: type, name: name}) do
+    case type do
+      "descriptor" ->
+        JS.navigate(~p"/descriptors/#{name}")
+
+      "type" ->
+        JS.navigate(~p"/types/#{name}")
+
+      "ability" ->
+        JS.navigate(~p"/abilities/#{name}")
+
+      _ ->
+        nil
+    end
   end
 end

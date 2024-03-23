@@ -4,10 +4,7 @@
       <a href="/">
         <img src={~p"/images/csol.png"} width="48" />
       </a>
-      <button
-        class="border rounded-lg border-zinc-300 p-2"
-        phx-click={JS.toggle_class("-translate-x-full", to: "#pinned-tray")}
-      >
+      <button class="border rounded-lg border-zinc-300 p-2" phx-click={toggle_tray()}>
         <.icon name="hero-inbox-solid" class="" />
       </button>
     </div>

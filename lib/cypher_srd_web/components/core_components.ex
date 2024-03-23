@@ -536,13 +536,21 @@ defmodule CypherSrdWeb.CoreComponents do
   """
   slot :item, required: true do
     attr :title, :string, required: true
+    attr :click, :any
   end
 
   def list(assigns) do
     ~H"""
     <div>
       <dl class="-my-4 divide-y divide-zinc-100">
-        <div :for={item <- @item} class="flex gap-4 py-4 text-sm leading-6 sm:gap-8">
+        <div
+          :for={item <- @item}
+          phx-click={item[:click] && item.click.()}
+          class={[
+            "flex gap-4 py-4 text-sm leading-6 sm:gap-8",
+            item[:click] && "cursor-pointer hover:bg-zinc-100"
+          ]}
+        >
           <dt class="w-1/4 flex-none text-zinc-500"><%= item.title %></dt>
           <dd class="text-zinc-700"><%= render_slot(item) %></dd>
         </div>
