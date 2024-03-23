@@ -11,7 +11,7 @@ defmodule CypherSrd.Util do
       "" ->
         false
 
-      :nil ->
+      nil ->
         false
 
       [] ->

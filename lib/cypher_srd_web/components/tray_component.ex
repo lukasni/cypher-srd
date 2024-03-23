@@ -98,6 +98,12 @@ defmodule CypherSrdWeb.TrayComponent do
       "ability" ->
         JS.navigate(~p"/abilities/#{name}")
 
+      "focus" ->
+        JS.navigate(~p"/foci/#{name}")
+
+      "creature" ->
+        JS.navigate(~p"/creatures/#{name}")
+
       _ ->
         nil
     end

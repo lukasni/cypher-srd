@@ -18,23 +18,24 @@ defmodule CypherSrdWeb.CreatureLive.Show do
 
   def sections() do
     [
-     :motive,
-     :environment,
-     :health,
-     :damage,
-     :armor,
-     :movement,
-     :modifications,
-     :combat,
-     :interaction,
-     :use,
-     :intrusions
+      :motive,
+      :environment,
+      :health,
+      :damage,
+      :armor,
+      :movement,
+      :modifications,
+      :combat,
+      :interaction,
+      :use,
+      :intrusions
     ]
   end
 
   def section_title(:damage) do
     "Damage Dealth"
   end
+
   def section_title(section) do
     section
     |> Atom.to_string()
