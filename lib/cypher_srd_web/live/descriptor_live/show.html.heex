@@ -1,0 +1,24 @@
+<.header>
+  <%= title_case(@descriptor.name) %>
+</.header>
+
+<div class="text-sm text-zinc-700">
+  <p><%= @descriptor.description %></p>
+
+  <h2 class="mt-4 font-bold">Characteristics</h2>
+  <.list>
+    <:item :for={item <- @descriptor.characteristics} title={item.name}>
+      <%= item.description %>
+    </:item>
+  </.list>
+
+  <h2 class="mt-4 font-bold">Initial link to the Starting Adventure</h2>
+  <p>
+    From the following list of options, choose how you became involved in the first adventure.
+  </p>
+  <ol>
+    <li :for={link <- @descriptor.links} class="list-decimal list-outside ml-4">
+      <%= link %>
+    </li>
+  </ol>
+</div>
