@@ -12,6 +12,10 @@ defmodule CypherSrdWeb.DescriptorLive.Index do
 
   def render(assigns) do
     ~H"""
+    <.header>
+      Descriptors
+    </.header>
+
     <.list>
       <:item
         :for={d <- @descriptors}

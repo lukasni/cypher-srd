@@ -1,0 +1,27 @@
+<.header>
+  <%= title_case(@focus.name) %>
+</.header>
+
+<div class="text-sm text-zinc-700">
+  <p><%= @focus.description %></p>
+
+  <h2 class="mt-4 font-bold">Abilities</h2>
+  <.list>
+    <:item :for={tier <- group_abilities(@focus)} title={title(tier)}>
+      <ul>
+        <li
+          :for={ability <- tier}
+          phx-click={
+            JS.remove_class("-translate-x-full", to: "#pinned-tray")
+            |> JS.push("pin")
+          }
+          phx-target="#pinned-tray"
+          phx-value-name={ability.name}
+          phx-value-type="ability"
+        >
+          <%= ability.name %>
+        </li>
+      </ul>
+    </:item>
+  </.list>
+</div>

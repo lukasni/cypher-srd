@@ -23,6 +23,8 @@ defmodule CypherSrdWeb.Router do
     live "/abilities/:ability", AbilityLive
     live "/descriptors", DescriptorLive.Index
     live "/descriptors/:descriptor", DescriptorLive.Show
+    live "/foci", FocusLive.Index
+    live "/foci/:focus", FocusLive.Show
   end
 
   # Other scopes may use custom stacks.
