@@ -18,7 +18,12 @@ defmodule CypherSrdWeb.TrayComponent do
       <div :for={item <- @pinned_items} class="text-sm" phx-click={link_for(item)}>
         <h5 class="font-semibold flex justify-between">
           <%= CypherSrd.Util.title_case(item.name) %>
-          <button phx-click="unpin" phx-target={@myself} phx-value-name={item.name}>
+          <button
+            phx-click="unpin"
+            phx-target={@myself}
+            phx-value-name={item.name}
+            phx-value-type={item.type}
+          >
             <.icon name="hero-bookmark-slash-solid" class="h-4" />
           </button>
         </h5>
@@ -40,17 +45,17 @@ defmodule CypherSrdWeb.TrayComponent do
 
     socket =
       socket.assigns.pinned_items
-      |> Enum.reject(&(&1.name == item.name))
+      |> Enum.reject(&(&1.name == item.name && &1.type == item.type))
       |> then(&[item | &1])
       |> then(&assign(socket, :pinned_items, &1))
 
     {:noreply, push_event(socket, "store-pins", storable_pins(socket))}
   end
 
-  def handle_event("unpin", %{"name" => name}, socket) do
+  def handle_event("unpin", %{"name" => name, "type" => type}, socket) do
     socket =
       socket.assigns.pinned_items
-      |> Enum.reject(&(&1.name == name))
+      |> Enum.reject(&(&1.name == name && &1.type == type))
       |> then(&assign(socket, :pinned_items, &1))
 
     {:noreply, push_event(socket, "store-pins", storable_pins(socket))}
@@ -97,6 +102,12 @@ defmodule CypherSrdWeb.TrayComponent do
 
       "ability" ->
         JS.navigate(~p"/abilities/#{name}")
+
+      "focus" ->
+        JS.navigate(~p"/foci/#{name}")
+
+      "creature" ->
+        JS.navigate(~p"/creatures/#{name}")
 
       _ ->
         nil

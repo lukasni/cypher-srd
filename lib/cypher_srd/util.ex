@@ -5,4 +5,23 @@ defmodule CypherSrd.Util do
     |> Enum.map(&String.capitalize/1)
     |> Enum.join(" ")
   end
+
+  def printable(thing) do
+    case thing do
+      "" ->
+        false
+
+      nil ->
+        false
+
+      [] ->
+        false
+
+      %{} ->
+        false
+
+      _other ->
+        true
+    end
+  end
 end

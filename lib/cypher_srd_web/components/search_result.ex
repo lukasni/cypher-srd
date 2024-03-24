@@ -103,6 +103,7 @@ defmodule CypherSrdWeb.SearchResult do
       description={@description}
       type="Creature"
       type_class="text-lime-500"
+      phx-click={JS.navigate(~p"/creatures/#{@name}/")}
     />
     """
   end
