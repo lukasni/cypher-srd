@@ -9,7 +9,7 @@
   <p>
     <%= @creature.description %>
   </p>
-  <p :for={section <- sections()} :if={printable(@creature[section])} class="mt-2">
+  <p :for={section <- sections()} :if={show_section(@creature, section)} class="mt-2">
     <strong>
       <%= section_title(section) %>:
     </strong>

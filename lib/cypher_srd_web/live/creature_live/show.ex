@@ -32,6 +32,9 @@ defmodule CypherSrdWeb.CreatureLive.Show do
     ]
   end
 
+  def show_section(%{armor: 0}, :armor), do: false
+  def show_section(creature, section), do: printable(creature[section])
+
   def section_title(:damage) do
     "Damage Dealth"
   end
