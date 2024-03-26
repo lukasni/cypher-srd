@@ -150,17 +150,17 @@ defmodule CypherSrdWeb.SearchResult do
   def two_col(assigns) do
     ~H"""
     <div
-      class="relative flex gap-4 p-4 text-sm leading-6 border-t sm:gap-8 hover:bg-zinc-100 bg-opacity-50"
+      class="relative block sm:flex gap-4 p-4 text-sm leading-6 border-t sm:gap-8 hover:bg-zinc-100 bg-opacity-50"
       {@rest}
     >
-      <div class="flex-none w-1/4">
+      <div class="flex-none w-1/4 overflow-hidden">
         <%= render_slot(@title) %>
       </div>
       <div class="text-zinc-700">
         <%= render_slot(@body) %>
       </div>
       <button
-        class="float-right h-6 w-6 flex items-center justify-center"
+        class="absolute top-2 right-2 h-6 w-6 flex items-center justify-center"
         phx-click={
           JS.remove_class("-translate-x-full", to: "#pinned-tray")
           |> JS.push("pin")

@@ -1,0 +1,43 @@
+<.header>
+  Creatures
+</.header>
+
+<h2>Filters</h2>
+<form phx-change="filter" class="flex gap-2">
+  <label
+    :for={kind <- @kinds}
+    class={[
+      "bg-zinc-300 rounded-lg px-3 py-1",
+      kind == @filter[:kind] && "bg-zinc-800 text-zinc-50"
+    ]}
+    type="button"
+  >
+    <%= kind %>
+    <input type="radio" name="kind" value={kind} checked={kind == @filter[:kind]} class="hidden" />
+  </label>
+  <select name="level" class="rounded-lg px-2 pr-8  py-1">
+    <option selected={@filter[:level] == nil} disabled value="">Level</option>
+    <option :for={level <- @levels} value={level} selected={@filter[:level] == level}>
+      <%= level %>
+    </option>
+  </select>
+  <button type="button" class="bg-zinc-300 rounded-lg px-3 py-1" phx-click="clear-filter">
+    Reset filter
+  </button>
+</form>
+
+<div :for={{kind, creatures} <- @by_kind} class="mt-4">
+  <h2 class="mb-2"><%= kind %></h2>
+  <.list>
+    <:item
+      :for={creature <- creatures}
+      title={title_case(creature.name)}
+      click={fn -> JS.navigate(~p"/creatures/#{creature.name}") end}
+    >
+      <p>Level <%= creature.level %> <%= creature.kind %></p>
+      <p class="line-clamp-4">
+        <%= creature.description %>
+      </p>
+    </:item>
+  </.list>
+</div>
